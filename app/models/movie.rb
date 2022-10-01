@@ -15,10 +15,10 @@ class Movie < ActiveRecord::Base
   # @list rating_list ['G','PG','PG-13','R']
   #                   nil for all movies
   def self.with_ratings(ratings_list)
-    if Movie.ALL_RATINGS == ratings_list
+    if ratings_list.length == 0
       Movie.all
     else
-      Movie.where("rating in ?", params[:ratings_list])
+      Movie.where("rating IN (?)", ratings_list)
     end
   end
 end
