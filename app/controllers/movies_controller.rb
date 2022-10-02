@@ -6,9 +6,20 @@ class MoviesController < ApplicationController
   end
 
   def index
+    if params[:commit] == "Refresh"
+      session[:ratings] = params[:ratings]
+    else
+      params[:ratings] = session[:ratings] || {}
+    end
+
     @ratings_to_show = params[:ratings] ? params[:ratings].keys : []
-    @movies = Movie.with_ratings(@ratings_to_show)
     @all_ratings = Movie.ALL_RATINGS
+    @sort_selector = params[:sort_select] ? params[:sort_select] : nil
+    if @sort_selector == nil
+      @movies = Movie.with_ratings(@ratings_to_show)
+    else
+      @movies = Movie.with_ratings_and_sort_by(@ratings_to_show, @sort_selector)
+    end
   end
 
   def new
