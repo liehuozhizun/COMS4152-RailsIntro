@@ -2,6 +2,11 @@
 <h2>All Movies</h2>
 
 <%#  Part 1: Start here... %>
+<style>
+  .visited {
+    background-color: orange;
+  }
+</style>
 
 <%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
   Include:
@@ -17,9 +22,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th>
+      <th class="visited"><a id="title_header" class="hilite" style="" link_to "Movie Title">Movie Title</a></th>
       <th>Rating</th>
-      <th>Release Date</th>
+      <th><a id="release_date_header" link_to "Release Date">Release Date</a></th>
       <th>More Info</th>
     </tr>
   </thead>
