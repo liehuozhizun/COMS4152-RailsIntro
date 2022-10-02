@@ -18,11 +18,11 @@
   <thead>
     <tr>
       <th class="<%= (@sort_selector == "title") ? "hilite bg-warning" : "" %>">
-        <a id="title_header" class="<%= (@sort_selector == "title") ? "hilite bg-warning" : "selectable" %>"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a>
+        <%= link_to "Movie Title", movies_path(:ratings => session[:ratings], :sort_select => :title), :class =>((@sort_selector == "title") ? "hilite bg-warning" : ""), :id => "title_header" %>
       </th>
       <th>Rating</th>
       <th class="<%= (@sort_selector == "release_date") ? "hilite bg-warning" : "" %>">
-        <%= link_to "Release Date", movies_path(:sort_select => :release_date), :class =>((@sort_selector == "release_date") ? "hilite bg-warning" : ""), :id => "release_date_header" %></a>
+        <%= link_to "Release Date", movies_path(:ratings => session[:ratings], :sort_select => :release_date), :class =>((@sort_selector == "release_date") ? "hilite bg-warning" : ""), :id => "release_date_header" %>
       </th>
       <th>More Info</th>
     </tr>
