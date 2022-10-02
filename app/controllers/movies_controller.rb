@@ -6,14 +6,6 @@ class MoviesController < ApplicationController
   end
 
   def index_display_as_normal(ratings, sort_select)
-    # puts "3--------------------"
-    # puts session[:ratings]
-    # puts session[:sort_select]
-    # puts "3--------------------"
-    # puts "!!!!!!!!!!!!!!!!!!!!"
-    # puts ratings
-    # puts sort_select
-    # puts "!!!!!!!!!!!!!!!!!!!!"
     @ratings_to_show = ratings.keys
     @sort_selector = sort_select
     
@@ -24,23 +16,19 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.with_ratings_and_sort_by(@ratings_to_show, sort_select)
     end
+
+    if params[:flag] == nil
+      redirect_to movies_path(:utf8 => '✓', :ratings => ratings, :sort_select => sort_select, :flag => :true) and return
+    end
   end
 
   def index
     @all_ratings = Movie.ALL_RATINGS
     if params[:ratings] == nil
-      # puts "1--------------------"
-      # puts session[:ratings]
-      # puts session[:sort_select]
-      # puts "1--------------------"
       if session[:ratings] == nil
         params[:ratings] = Movie.ALL_RATINGS_MAP
-        redirect_to movies_path(:ratings => Movie.ALL_RATINGS_MAP) and return
+        redirect_to movies_path(:utf8 => '✓', :ratings => Movie.ALL_RATINGS_MAP, :sort_select => nil) and return
       else
-        # puts "2--------------------"
-        # puts session[:ratings]
-        # puts session[:sort_select]
-        # puts "2--------------------"
         index_display_as_normal(session[:ratings], session[:sort_select])
         return
       end
