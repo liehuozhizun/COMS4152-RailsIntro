@@ -3,9 +3,6 @@
 
 <%#  Part 1: Start here... %>
 <style>
-  .selected {
-    background-color: orange;
-  }
   .selectable {
     cursor: pointer;
     text-decoration: none;
@@ -26,9 +23,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th class=<%= (@sort_selector == "title") ? "hilite selected" : "" %>><a id="title_header" class="hilite selectable"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a></th>
+      <th class="<%= (@sort_selector == "title") ? "hilite bg-warning" : "" %>"><a id="title_header" class="<%= (@sort_selector == "title") ? "hilite selectable bg-warning" : "selectable" %>"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a></th>
       <th>Rating</th>
-      <th class=<%= (@sort_selector == "release_date") ? "hilite selected" : "" %>><a id="release_date_header" class="hilite selectable"><%= link_to "Release Date", movies_path(:sort_select => :release_date) %></a></th>
+      <th class="<%= (@sort_selector == "release_date") ? "hilite bg-warning" : "" %>"><a id="release_date_header" class="<%= (@sort_selector == "release_date") ? "hilite selectable bg-warning" : "selectable" %>"><%= link_to "Release Date", movies_path(:sort_select => :release_date) %></a></th>
       <th>More Info</th>
     </tr>
   </thead>
