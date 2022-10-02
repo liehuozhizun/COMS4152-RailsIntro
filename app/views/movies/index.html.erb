@@ -2,12 +2,6 @@
 <h2>All Movies</h2>
 
 <%#  Part 1: Start here... %>
-<style>
-  .selectable {
-    cursor: pointer;
-    text-decoration: none;
-  }
-</style>
 
 <%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
   Include:
@@ -23,9 +17,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th class="<%= (@sort_selector == "title") ? "hilite bg-warning" : "" %>"><a id="title_header" class="<%= (@sort_selector == "title") ? "hilite selectable bg-warning" : "selectable" %>"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a></th>
+      <th class="<%= (@sort_selector == "title") ? "hilite bg-warning" : "" %>"><a id="title_header" class="<%= (@sort_selector == "title") ? "hilite bg-warning" : "selectable" %>"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a></th>
       <th>Rating</th>
-      <th class="<%= (@sort_selector == "release_date") ? "hilite bg-warning" : "" %>"><a id="release_date_header" class="<%= (@sort_selector == "release_date") ? "hilite selectable bg-warning" : "selectable" %>"><%= link_to "Release Date", movies_path(:sort_select => :release_date) %></a></th>
+      <th class="<%= (@sort_selector == "release_date") ? "hilite bg-warning" : "" %>"><a id="release_date_header" class="<%= (@sort_selector == "release_date") ? "hilite bg-warning" : "selectable" %>"><%= link_to "Release Date", movies_path(:sort_select => :release_date) %></a></th>
       <th>More Info</th>
     </tr>
   </thead>
