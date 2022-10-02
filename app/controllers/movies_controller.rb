@@ -10,7 +10,13 @@ class MoviesController < ApplicationController
       session[:ratings] = params[:ratings]
     else
       params[:ratings] = session[:ratings] || {}
+      if params[:sort_select]
+        session[:sort_select] = params[:sort_select]
+      else
+        params[:sort_select] = session[:sort_select] || {}
+      end
     end
+    
 
     @ratings_to_show = params[:ratings] ? params[:ratings].keys : []
     @all_ratings = Movie.ALL_RATINGS
