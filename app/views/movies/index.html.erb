@@ -26,9 +26,9 @@
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th class=<%= (@sort_selector == "title") ? "selected hilite" : "" %>><a id="title_header" class="hilite selectable"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a></th>
+      <th class=<%= (@sort_selector == "title") ? "hilite selected" : "" %>><a id="title_header" class="hilite selectable"><%= link_to "Movie Title", movies_path(:sort_select => :title) %></a></th>
       <th>Rating</th>
-      <th class=<%= (@sort_selector == "release_date") ? "selected hilite" : "" %>><a id="release_date_header" class="hilite selectable"><%= link_to "Release Date", movies_path(:sort_select => :release_date) %></a></th>
+      <th class=<%= (@sort_selector == "release_date") ? "hilite selected" : "" %>><a id="release_date_header" class="hilite selectable"><%= link_to "Release Date", movies_path(:sort_select => :release_date) %></a></th>
       <th>More Info</th>
     </tr>
   </thead>
