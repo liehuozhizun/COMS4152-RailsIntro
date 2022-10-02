@@ -11,6 +11,9 @@ class Movie < ActiveRecord::Base
   def self.ALL_RATINGS
     ['G','PG','PG-13','R']
   end
+  def self.ALL_RATINGS_MAP
+    {'G' => 1, 'PG' => 1, 'PG-13' => 1, 'R' => 1}
+  end
 
   # @list rating_list ['G','PG','PG-13','R']
   #                   nil for all movies

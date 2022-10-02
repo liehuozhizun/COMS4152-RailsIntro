@@ -8,12 +8,13 @@ class MoviesController < ApplicationController
   def index
     if params[:commit] == "Refresh"
       session[:ratings] = params[:ratings]
+      session[:sort_select] = nil
     else
-      params[:ratings] = session[:ratings] || {}
+      params[:ratings] = session[:ratings] || Movie.ALL_RATINGS_MAP
       if params[:sort_select]
         session[:sort_select] = params[:sort_select]
       else
-        params[:sort_select] = session[:sort_select] || {}
+        params[:sort_select] = session[:sort_select]
       end
     end
     
