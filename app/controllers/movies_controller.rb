@@ -5,30 +5,51 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-  def index
-    # session[:ratings] = nil
-    # session[:sort_select] = nil
-
-    if params[:commit] == "Refresh"
-      session[:ratings] = params[:ratings]
-      session[:sort_select] = nil
-      params[:sort_select] = nil
+  def index_display_as_normal(ratings, sort_select)
+    # puts "3--------------------"
+    # puts session[:ratings]
+    # puts session[:sort_select]
+    # puts "3--------------------"
+    # puts "!!!!!!!!!!!!!!!!!!!!"
+    # puts ratings
+    # puts sort_select
+    # puts "!!!!!!!!!!!!!!!!!!!!"
+    @ratings_to_show = ratings.keys
+    @sort_selector = sort_select
+    
+    session[:ratings] = ratings
+    session[:sort_select] = sort_select
+    if sort_select == nil
+      @movies = Movie.with_ratings(@ratings_to_show)
     else
-      params[:ratings] = session[:ratings] || Movie.ALL_RATINGS_MAP
-      if params[:sort_select]
-        session[:sort_select] = params[:sort_select]
+      @movies = Movie.with_ratings_and_sort_by(@ratings_to_show, sort_select)
+    end
+  end
+
+  def index
+    @all_ratings = Movie.ALL_RATINGS
+    if params[:ratings] == nil
+      # puts "1--------------------"
+      # puts session[:ratings]
+      # puts session[:sort_select]
+      # puts "1--------------------"
+      if session[:ratings] == nil
+        params[:ratings] = Movie.ALL_RATINGS_MAP
+        redirect_to movies_path(:ratings => Movie.ALL_RATINGS_MAP) and return
       else
-        params[:sort_select] = session[:sort_select]
+        # puts "2--------------------"
+        # puts session[:ratings]
+        # puts session[:sort_select]
+        # puts "2--------------------"
+        index_display_as_normal(session[:ratings], session[:sort_select])
+        return
       end
     end
 
-    @ratings_to_show = params[:ratings].keys
-    @all_ratings = Movie.ALL_RATINGS
-    @sort_selector = params[:sort_select] ? params[:sort_select] : nil
-    if @sort_selector == nil
-      @movies = Movie.with_ratings(@ratings_to_show)
+    if params[:commit] == "Refresh"
+      index_display_as_normal(params[:ratings], nil)
     else
-      @movies = Movie.with_ratings_and_sort_by(@ratings_to_show, @sort_selector)
+      index_display_as_normal(params[:ratings], params[:sort_select])
     end
   end
 
